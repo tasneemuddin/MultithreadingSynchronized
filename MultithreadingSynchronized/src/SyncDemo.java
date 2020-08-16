@@ -11,13 +11,14 @@ class Counter {
 	}
 }
 
+
 public class SyncDemo {
 
 	public static void main(String[] args) throws InterruptedException {
 		Counter c = new Counter();
 		
 		//Thread incrementing the value of counter 1000 times
-		Thread T1 = new Thread(new Runnable() {
+		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				for(int i = 0; i < 1000; i++)
@@ -26,7 +27,7 @@ public class SyncDemo {
 		});
 		
 		//Thread incrementing the value of counter 1000 times
-		Thread T2 = new Thread(new Runnable() {
+		Thread t2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				for(int i = 0; i < 1000; i++)
@@ -34,11 +35,14 @@ public class SyncDemo {
 			}
 		});
 		
-		T1.start();///start the thread
-		T2.start();///start the thread
+		t1.setPriority(Thread.MIN_PRIORITY);
+		t2.setPriority(Thread.MAX_PRIORITY);
 		
-		T1.join();//wait for thread to finish
-		T2.join();//wait for thread to finish
+		t1.start();///start the thread
+		t2.start();///start the thread
+		
+		t1.join();//wait for thread to finish
+		t2.join();//wait for thread to finish
 		
 		System.out.println("Count : "+c.getCounter());
 	}
