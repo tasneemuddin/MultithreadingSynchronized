@@ -18,21 +18,15 @@ public class SyncDemo {
 		Counter c = new Counter();
 		
 		//Thread incrementing the value of counter 1000 times
-		Thread t1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				for(int i = 0; i < 1000; i++)
-					c.increment();
-			}
+		Thread t1 = new Thread(() -> {//Lambda expression
+			for(int i = 0; i < 1000; i++)
+				c.increment();
 		});
 		
 		//Thread incrementing the value of counter 1000 times
-		Thread t2 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				for(int i = 0; i < 1000; i++)
-					c.increment();
-			}
+		Thread t2 = new Thread(() -> {//Lambda expression
+			for(int i = 0; i < 1000; i++)
+				c.increment();
 		});
 		
 		t1.setPriority(Thread.MIN_PRIORITY);
